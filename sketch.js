@@ -23,6 +23,13 @@ function setup() {
     createCanvas(640, 360)
     colorMode(HSB, 360, 100, 100, 100)
     textFont(font, 14)
+    for (let p in passages) {
+        textList.push(passages[p]['text'])
+        // console.log(p.text)
+        // console.log(p)
+    }
+    console.log(passages.length)
+    console.log(textList)
 }
 
 function draw() {
