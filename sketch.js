@@ -24,12 +24,18 @@ function setup() {
     colorMode(HSB, 360, 100, 100, 100)
     textFont(font, 14)
     for (let p in passages) {
-        textList.push(passages[p]['text'])
+        textList.push(passages[p]["text"])
         // console.log(p.text)
         // console.log(p)
+        for (let h of passages[p]["highlightIndices"]) {
+            highlightList.push([h["start"], h["end"]])
+        }
+        msPerPassage = passages[p]["ms"]
+        console.log(msPerPassage)
     }
-    console.log(passages.length)
-    console.log(textList)
+    // console.log(highlightList)
+    // console.log(passages.length)
+    // console.log(textList)
 }
 
 function draw() {
