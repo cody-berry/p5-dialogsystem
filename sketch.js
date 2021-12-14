@@ -19,6 +19,15 @@ version comments
 let font
 let passages // our json file input
 let dialogBox // our dialog box
+// let's have our hue and default saturation
+const red_hue = 0
+const green_hue = 85
+const blue_hue = 225
+const sat = 90
+const brightness_light = 60
+const brightness_dark = 30
+// and our endpoints
+const endpoints = 10000
 
 function preload() {
     font = loadFont('data/notjustgroovy.ttf')
@@ -63,10 +72,36 @@ function setup() {
 function draw() {
     background(234, 34, 24)
     dialogBox.renderTextFrame(cam)
+    drawBlenderAxis()
     console.log(textFrame)
 
 }
 // prevent the context menu from showing up :3 nya~
 document.oncontextmenu = function () {
     return false;
+}
+
+// draws our blender axis
+function drawBlenderAxis() {
+    // red, x
+    // dark
+    stroke(red_hue, sat, brightness_dark)
+    line(0, 0, 0, -endpoints, 0, 0)
+    // light
+    stroke(red_hue, sat, brightness_light)
+    line(0, 0, 0, endpoints, 0, 0)
+    // green, y
+    // dark
+    stroke(green_hue, sat, brightness_dark)
+    line(0, 0, 0, 0, -endpoints, 0)
+    // light
+    stroke(green_hue, sat, brightness_light)
+    line(0, 0, 0, 0, endpoints, 0)
+    // blue, z
+    // dark
+    stroke(blue_hue, sat, brightness_dark)
+    line(0, 0, 0, 0, 0, -endpoints)
+    // light
+    stroke(blue_hue, sat, brightness_light)
+    line(0, 0, 0, 0, 0, endpoints)
 }
