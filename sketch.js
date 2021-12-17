@@ -7,8 +7,8 @@ version comments
     ... text list, highlight list, milliseconds per passage
     .   display frame
     ..  WEBGL and display it in the same place but with beginHUD() and endHUD()
-    *** blender axis
-    *   p5.easyCam()
+    ... blender axis
+    .   p5.easyCam()
     *   display a single line inside the text frame
     *   word wrap
     *   advancing characters
@@ -64,16 +64,17 @@ function setup() {
     // console.log(textList)
     textFrame = loadImage("data/textFrame.png")
     // textFrame.resize(640, 360)
-    console.log(textFrame)
-    dialogBox = new DialogBox(passages, highlightList, msPerPassage, textFrame)
-    console.log(textFrame)
+    // console.log(textFrame)
+    dialogBox = new DialogBox(textList, highlightList, msPerPassage, textFrame)
+    // console.log(textFrame)
 }
 
 function draw() {
     background(234, 34, 24)
-    dialogBox.renderTextFrame(cam)
     drawBlenderAxis()
-    console.log(textFrame)
+    dialogBox.renderTextFrame(cam)
+    dialogBox.renderText(cam)
+    // console.log(textFrame)
 
 }
 // prevent the context menu from showing up :3 nya~
