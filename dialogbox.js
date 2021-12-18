@@ -10,6 +10,8 @@ class DialogBox {
         this.textFrame.resize(640, 360)
         // our current passage index
         this.currentIndex = 5
+        // our current character index
+        this.characterIndex = 0
     }
 
     // loads the saved box texture with transparency
@@ -36,7 +38,7 @@ class DialogBox {
         let y = topMargin
         let wrap = false
         fill(0, 0, 100)
-        for (let i = 0; i < currentPassage.length; i++) {
+        for (let i = 0; i < this.characterIndex; i++) {
             let c = currentPassage[i]
             text(c, x, y)
             x += textWidth(c)
@@ -64,9 +66,22 @@ class DialogBox {
             if (wrap) {
                 x = leftMargin
                 y += textAscent() + textDescent() + 6
-                wrap=false
+                wrap = false
             }
         }
+        // if our characters aren't already done skipping, we should
+        // increment our character index
+        if (this.characterIndex < currentPassage.length) {
+            // the reciprocal of this increase number is actually the number
+            // of frames per increase. In this case, it's 5/3.
+            this.characterIndex += 3/5
+        }
+        // because we don't want to go a fraction over
+        // currentPassage.length, we have to do a non-seperate check
+        if (this.characterIndex > currentPassage.length) {
+            this.characterIndex = currentPassage.length
+        }
+
         cam.endHUD()
     }
 }
