@@ -9,7 +9,7 @@ version comments
     ..  WEBGL and display it in the same place but with beginHUD() and endHUD()
     ... blender axis
     .   p5.easyCam()
-    *   display a single line inside the text frame
+    .   display a single line inside the text frame
     *   word wrap
     *   advancing characters
     *   advancing passages using some time delay system
