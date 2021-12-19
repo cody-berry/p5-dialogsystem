@@ -2,6 +2,7 @@ class DialogBox {
     constructor(passages, highlightIndices, msPerPassage, textFrame) {
         // let's assign the passages we have, the highlight indices given in
         // a tuple, and the milliseconds per passage!
+        colorMode(HSB, 360, 100, 100, 100)
         this.passages = passages
         this.highlightIndices = highlightIndices
         this.msPerPassage = msPerPassage
@@ -9,9 +10,11 @@ class DialogBox {
         this.textFrame = textFrame
         this.textFrame.resize(640, 360)
         // our current passage index
-        this.currentIndex = 5
+        this.currentIndex = 0
         // our current character index
         this.characterIndex = 0
+        // the last advanced millisecond
+        this.lastAdvance = millis()
     }
 
     // loads the saved box texture with transparency
@@ -40,6 +43,21 @@ class DialogBox {
         fill(0, 0, 100)
         for (let i = 0; i < this.characterIndex; i++) {
             let c = currentPassage[i]
+            // now we're checking if we should start highlighting or not, so
+            // if i is the starting index of one of the tuples...
+            for (let highlight of this.highlightIndices[this.currentIndex]) {
+                if (i === highlight[0]) {
+                    // ...we fill with yellow...
+                    fill(63, 60, 75)
+                    // console.log("yellow!")
+                }
+                // ...and if i is the ending index...
+                if (i === highlight[1]) {
+                    // ...we reset our fill to white.
+                    fill(0, 0, 100)
+                }
+            }
+
             text(c, x, y)
             x += textWidth(c)
 
@@ -69,19 +87,31 @@ class DialogBox {
                 wrap = false
             }
         }
+        cam.endHUD()
+    }
+
+    // update our status
+    update() {
         // if our characters aren't already done skipping, we should
         // increment our character index
+        let currentPassage = this.passages[this.currentIndex]
         if (this.characterIndex < currentPassage.length) {
             // the reciprocal of this increase number is actually the number
-            // of frames per increase. In this case, it's 5/3.
-            this.characterIndex += 3/5
+            // of frames per increase. In this case, it's 5/4.
+            this.characterIndex += 4/5
         }
         // because we don't want to go a fraction over
-        // currentPassage.length, we have to do a non-seperate check
+        // currentPassage.length, we have to do a non-separate check
         if (this.characterIndex > currentPassage.length) {
             this.characterIndex = currentPassage.length
         }
-
-        cam.endHUD()
+        text(this.lastAdvance, 0, height)
+        // if the milliseconds passed since the last advance is greater, we
+        // advance the current index
+        if (millis() - this.lastAdvance > this.msPerPassage[this.currentIndex]) {
+            this.currentIndex++
+            this.lastAdvance = millis()
+            this.characterIndex = 0
+        }
     }
 }

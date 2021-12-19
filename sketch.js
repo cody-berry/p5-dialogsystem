@@ -11,9 +11,10 @@ version comments
     .   p5.easyCam()
     .   display a single line inside the text frame
     .   word wrap
-    *   advancing characters
-    *   advancing passages using some time delay system
-    *   SQUIRREL!!!
+    .   advancing characters
+    .   advancing passages using some time delay system
+    *   highlighting
+    **  SQUIRREL!!!
 */
 
 let font
@@ -52,14 +53,17 @@ function setup() {
         textList.push(passages[p]["text"])
         // console.log(p.text)
         // console.log(p)
-        for (let h of passages[p]["highlightIndices"]) {
-            highlightList.push([h["start"], h["end"]])
+        let list = []
+        for (let highlight of passages[p]["highlightIndices"]) {
+            console.log(highlight)
+            list.push([highlight["start"], highlight["end"]])
         }
+        highlightList.push(list)
         msPerPassage.push(passages[p]["ms"])
         // console.log(msPerPassage)
     }
 
-    // console.log(highlightList)
+    console.log(highlightList)
     // console.log(passages.length)
     // console.log(textList)
     textFrame = loadImage("data/textFrame.png")
@@ -74,6 +78,7 @@ function draw() {
     drawBlenderAxis()
     dialogBox.renderTextFrame(cam)
     dialogBox.renderText(cam)
+    dialogBox.update()
     // console.log(textFrame)
 
 }

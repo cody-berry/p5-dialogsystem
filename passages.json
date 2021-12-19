@@ -4,7 +4,7 @@
     "highlightIndices": [
       {
         "start": 78,
-        "end": 102
+        "end": 103
       },
       {
         "start": 22,
@@ -32,7 +32,7 @@
     "highlightIndices": [
       {
         "start": 120,
-        "end": 126
+        "end": 125
       }
     ],
     "ms": 4000
@@ -43,12 +43,12 @@
     "highlightIndices": [
       {
         "start": 52,
-        "end": 66
+        "end": 65
       },
 
       {
         "start": 195,
-        "end": 211
+        "end": 210
       }
     ],
     "ms": 4000
@@ -59,7 +59,7 @@
     "highlightIndices": [
       {
         "start": 134,
-        "end": 160
+        "end": 159
       }
     ],
     "ms": 4000
